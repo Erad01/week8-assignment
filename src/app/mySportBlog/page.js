@@ -5,7 +5,7 @@ import Link from "next/link"
 export default async function MySportBlogPage(){
 
     const query = await db.query(
-        `SELECT id, title, description FROM posts`);
+        `SELECT id, title, description, imagesrc FROM posts`);
 
         console.log(query);
         const blogPosts = query.rows;
