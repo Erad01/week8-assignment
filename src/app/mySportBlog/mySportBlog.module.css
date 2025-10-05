@@ -13,3 +13,30 @@
     display: flex;
     justify-content: space-between;
 }
+
+.comment{
+    color: blue;
+    background-color: aliceblue;
+    width: 100%;
+    padding: 5px;
+
+}
+
+.commentName{
+    color: black;
+    text-align: right;
+}
+
+.formStyle{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: white;
+    padding: 10px;
+}
+
+.commentSection{
+    width: 100%;
+    margin-top: 15px;
+    
+}
+

@@ -16,6 +16,12 @@ export default function HomePage(){
       <li>Weekly updates, match analyses, and transfer buzz</li>
       <li>A vibrant space to share opinions, predictions, and debates with fellow fans...</li>
     </ul>
+
+    <br></br>
+    <br></br>
+
+    <h2>This is not just a blog — it is a community built around the heartbeat of English football.
+Kick back, stay tuned, and let us celebrate the beautiful game together!</h2>
     </>
   )
 }

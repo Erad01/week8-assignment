@@ -1,7 +1,10 @@
+
 import {db} from "@/utils/db.Connection"
 import Image from 'next/image';
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
+import sportBlogStyles from "../mySportBlog.module.css";
+
 
 
 export default async function MySportBlogDetailsPage({params}){
@@ -10,9 +13,15 @@ export default async function MySportBlogDetailsPage({params}){
 
     const query = await db.query(
         `SELECT id, title, description, imagesrc FROM posts WHERE id = ${mySportBlogId}`)
-        //console.log(query)
 
         const blogPost = query.rows[0];
+
+        const query1 = await db.query(
+        `SELECT id, name, comment, post_id FROM comments WHERE post_id = ${mySportBlogId}`)
+
+        const commentDetails = query1.rows
+
+        console.log(query1.rows)
 
         async function HandleSubmit(formData){
             "use server"
@@ -23,10 +32,9 @@ export default async function MySportBlogDetailsPage({params}){
             }
 
              db.query(
-            `INSERT INTO comments (name, comment) VALUES($1, $2) WHERE post_id = ${mySportBlogId}`,
-             [formValues.name, formValues.comment]
+            `INSERT INTO comments (name, comment, post_id) VALUES($1, $2, $3)`,
+             [formValues.name, formValues.comment, mySportBlogId ]
             );
-
 
             //refresh the cache
             revalidatePath(`/mySportBlog/${mySportBlogId}`);
@@ -37,6 +45,10 @@ export default async function MySportBlogDetailsPage({params}){
 
 
         }
+        // async function handleDelete ({commentId}){
+        //     "use client"
+        //     console.log(commentId)
+        // }
 
          
     return(
@@ -50,7 +62,7 @@ export default async function MySportBlogDetailsPage({params}){
             />
             <p>{blogPost.description}</p>
 
-            <form action={HandleSubmit}>
+            <form className={sportBlogStyles.formStyle} action={HandleSubmit}>
                 <fieldset>
                     <legend>What&apos;s your say</legend>
                     <label htmlFor="name">Name: </label>
@@ -62,6 +74,27 @@ export default async function MySportBlogDetailsPage({params}){
 
 
             </form>
+
+            <div className={sportBlogStyles.commentSection}>
+                {commentDetails.map((commentdetail)=>{
+                    return(
+                        <div className={sportBlogStyles.commentCon} key={commentdetail.id}>
+                            <div className={sportBlogStyles.comment}>
+                                 {commentdetail.comment}
+                            </div>
+
+                            <div className={sportBlogStyles.commentName}>
+                                 {commentdetail.name}
+                            </div>
+                           
+                            {/* <button type="button" onClick={()=>handleDelete("commentdetail.id")}>DEL</button> */}
+
+                            {/* <button onClick={() => console.log('Button clicked!')}>Click me!</button> */}
+
+                        </div>
+                    )
+                })}
+            </div>
 
         </>
     )
