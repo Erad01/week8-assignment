@@ -1,0 +1,15 @@
+.titleContainer {
+    color: var(--link-colour);
+    padding: 20px;
+}
+
+
+.link {
+    font-weight: 700;
+    color: var(--link-colour);
+    &:hover {
+        background-color: var(--accent-colour);
+    }
+    display: flex;
+    justify-content: space-between;
+}

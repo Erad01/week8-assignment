@@ -3,10 +3,10 @@ import Link from "next/link"
 export default function HeaderPage(){
     return(
         <>
-        <nav>
-            <Link href= "/">Home</Link>
-            <Link href= "/aboutMe">About Me</Link>
-            <Link href= "/mySportBlog">SportBlog</Link>
+        <nav className="flex gap-y-2 p-2">
+            <Link className="p-6" href= "/">Home</Link>
+            <Link className="p-6" href= "/aboutMe">About Me</Link>
+            <Link className="p-6" href= "/mySportBlog">SportBlog</Link>
         </nav>
         </>
     )

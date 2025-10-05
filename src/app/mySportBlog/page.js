@@ -1,5 +1,6 @@
 import {db} from "@/utils/db.Connection"
 import Link from "next/link"
+import sportBlogStyles from "./mySportBlog.module.css";
 
 
 export default async function MySportBlogPage(){
@@ -7,8 +8,21 @@ export default async function MySportBlogPage(){
     const query = await db.query(
         `SELECT id, title, description, imagesrc FROM posts`);
 
-        console.log(query);
+
         const blogPosts = query.rows;
+
+        //const wrangledData = query.title
+
+        // if(query.title.sort === "asc"){
+        //     blogPosts.title.sort((a,b)=>{
+        //         return a.title.localeCompare(b.title);
+        //     })
+        // }
+        // else if (query.title.sort === "desc"){
+        //     blogPosts.title.sort((a,b)=>{
+        //         return b.title.localeCompare(a.title)
+        //     })
+        // }
     return(
         <>
 
@@ -19,8 +33,8 @@ export default async function MySportBlogPage(){
                 {
                     blogPosts.map((blogPost)=>{
                         return (
-                            <div key={blogPost.id}>
-                                <Link href={`/mySportBlog/${blogPost.id}`}>
+                            <div className={sportBlogStyles.titleContainer} key={blogPost.id}>
+                                <Link className={sportBlogStyles.link} href={`/mySportBlog/${blogPost.id}`}>
                                 {blogPost.title}
 
                                 </Link>

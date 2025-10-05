@@ -4,6 +4,7 @@ import HeaderPage from "@/components/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
+  weight: "500",
   subsets: ["latin"],
 });
 
